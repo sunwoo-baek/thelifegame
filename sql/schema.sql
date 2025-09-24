@@ -34,7 +34,7 @@ CREATE TABLE if not exists categories (
 
 -- ------------------------
 -- Tasks table
--- ------------------------
+-- ------------------------ (consider making all of them optional)
 CREATE TABLE if not exists tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE if not exists tasks (
     occurred_at DATETIME NOT NULL,
     duration_seconds INT NULL,
     quantity decimal null, -- flexible: minutes, reps, money, episodes, etc.
-    points_earned int default 0,
+    points_earned int default 0, -- can be calculated on the fly
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (category_id) REFERENCES categories(id)

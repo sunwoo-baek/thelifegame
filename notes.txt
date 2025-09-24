@@ -1,0 +1,37 @@
+Progress Tracking Brainstorm:
+1. User level:
+    - Total points accumulated
+    - Total tasks completed (subtrack negatives)
+    - Avg points accumulated per day/week/month
+    - Avg tasks completed per day/week/month (subtrack negatives)
+
+2. Category level:
+    - Total points accumulated
+    - Total tasks completed (subtrack negatives)
+    - Avg points accumulated per day/week/month
+    - Avg tasks completed per day/week/month (subtrack negatives)
+    - Duration accumulated
+    - Quantity achieved
+
+Visualizations:
+1. Line chart:
+    - Points earned over time
+    - Points increase rate over time? (derivative, consider performance)
+    - Tasks done over time
+    - Task increase rate over time? (derivative)
+    - Allow adjustable time
+    - Allow filtering subcategories (like checkbox)
+
+2. Pie Chart:
+    - shows ratio of categories/subcategories
+    - Potential filtering:
+        - checkbox each desired subcategory
+    - Drill-down pie chart. Zoom into categories.
+
+Goals feature:
+    - separate entity
+    - references a category
+    - title
+    - Optionals: desc, metric, quantity, duration
+    - list goals for certain categories
+    - potentially add progress bar
