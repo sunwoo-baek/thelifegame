@@ -15,9 +15,21 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    // create or update user
+    // save user
     public User saveUser(User user) {
         return userRepository.save(user);
+    }
+
+    // update user
+    public User updateUser(Long id, User updatedUser) {
+        return userRepository.findById(id).map(user -> {
+            if (updatedUser.getUsername() != null) user.setUsername(updatedUser.getUsername());
+            if (updatedUser.getEmail() != null) user.setEmail(updatedUser.getEmail());
+            if (updatedUser.getPasswordHash() != null) user.setPasswordHash(updatedUser.getPasswordHash());
+            // Add any other fields you want to allow updating
+
+            return userRepository.save(user);
+        }).orElseThrow(() -> new RuntimeException("User not found with id " + id));
     }
 
     // find user by id
@@ -40,4 +52,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    // delete user
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
 }

@@ -15,9 +15,25 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    // create or update category
+    // save category
     public Category saveCategory(Category category) {
         return categoryRepository.save(category);
+    }
+
+    // update category
+    public Category updateCategory(Long id, Category updatedCategory) {
+        return categoryRepository.findById(id).map(category -> {
+            if (updatedCategory.getParent() != null) category.setParent(updatedCategory.getParent());
+            if (updatedCategory.getUser() != null) category.setUser(updatedCategory.getUser());
+            if (updatedCategory.getName() != null) category.setName(updatedCategory.getName());
+            if (updatedCategory.getDescription() != null) category.setDescription(updatedCategory.getDescription());
+            if (updatedCategory.getChildren() != null) category.setChildren(updatedCategory.getChildren());
+            if (updatedCategory.getUnit() != null) category.setUnit(updatedCategory.getUnit());
+            if (updatedCategory.getPointsPerUnit() != null) category.setPointsPerUnit(updatedCategory.getPointsPerUnit());
+            // Add any other fields you want to allow updating
+
+            return categoryRepository.save(category);
+        }).orElseThrow(() -> new RuntimeException("Category not found with id " + id));
     }
 
     // find category by id

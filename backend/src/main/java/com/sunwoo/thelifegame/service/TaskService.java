@@ -15,9 +15,26 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    // create or update task
+    // save task
     public Task saveTask(Task task) {
         return taskRepository.save(task);
+    }
+
+    // update task
+    public Task updateTask(Long id, Task updatedTask) {
+        return taskRepository.findById(id).map(task -> {
+            if (updatedTask.getUser() != null) task.setUser(updatedTask.getUser());
+            if (updatedTask.getCategory() != null) task.setCategory(updatedTask.getCategory());
+            if (updatedTask.getTitle() != null) task.setTitle(updatedTask.getTitle());
+            if (updatedTask.getDescription() != null) task.setDescription(updatedTask.getDescription());
+            if (updatedTask.getOccurredAt() != null) task.setOccurredAt(updatedTask.getOccurredAt());
+            if (updatedTask.getDurationSeconds() != null) task.setDurationSeconds(updatedTask.getDurationSeconds());
+            if (updatedTask.getQuantity() != null) task.setQuantity(updatedTask.getQuantity());
+            if (updatedTask.getPointsEarned() != null) task.setPointsEarned(updatedTask.getPointsEarned());
+            // Add any other fields you want to allow updating
+
+            return taskRepository.save(task);
+        }).orElseThrow(() -> new RuntimeException("Task not found with id " + id));
     }
 
     // find task by id
