@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")  // base path for all user-related endpoints
@@ -33,20 +32,23 @@ public class UserController {
 
     // Get user by ID
     @GetMapping("/{id}")
-    public Optional<User> getUserById(@PathVariable Long id) {
-        return userService.findById(id);
+    public User getUserById(@PathVariable("id") Long id) {
+        return userService.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     // Get user by username
     @GetMapping("/by-username/{username}")
-    public Optional<User> getUserByUsername(@PathVariable String username) {
-        return userService.findByUsername(username);
+    public User getUserByUsername(@PathVariable("username") String username) {
+        return userService.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     // Get user by email
     @GetMapping("/by-email/{email}")
-    public Optional<User> getUserByEmail(@PathVariable String email) {
-        return userService.findByEmail(email);
+    public User getUserByEmail(@PathVariable("email") String email) {
+        return userService.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     // Get all users
@@ -57,7 +59,7 @@ public class UserController {
 
     // Delete user
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
+    public void deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
     }
 }

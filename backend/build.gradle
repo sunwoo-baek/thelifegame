@@ -22,6 +22,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'          // REST APIs
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'     // JPA / jakarta
     implementation 'mysql:mysql-connector-java:8.0.33'                          // MySQL DB
+	implementation 'me.paulschwarz:spring-dotenv:3.0.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }

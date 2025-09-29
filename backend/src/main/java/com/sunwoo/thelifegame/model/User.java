@@ -14,14 +14,19 @@ public class User {
     @Column(nullable = false, unique = true, length = 50)
     private String username;
 
-    @Column(length = 100)
+    @Column(nullable = false, length = 100)
     private String email;
 
-    @Column(name = "password_hash", length = 100)
+    @Column(name = "password_hash", nullable = false, length = 100)
     private String passwordHash;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 
     // Constructors
     public User() {} // for JPA
