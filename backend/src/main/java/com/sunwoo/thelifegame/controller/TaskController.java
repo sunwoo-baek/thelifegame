@@ -27,31 +27,31 @@ public class TaskController {
 
     // Update a task
     @PatchMapping("/{id}")
-    public Task updateTask(@PathVariable Long id, @RequestBody Task updatedTask) {
+    public Task updateTask(@PathVariable("id") Long id, @RequestBody Task updatedTask) {
         return taskService.updateTask(id, updatedTask);
     }
 
     // Get task by ID
     @GetMapping("/{id}")
-    public Optional<Task> getTaskById(@PathVariable Long id) {
+    public Optional<Task> getTaskById(@PathVariable("id") Long id) {
         return taskService.findById(id);
     }
 
     // Get all tasks for a user
     @GetMapping("/user/{userId}")
-    public List<Task> getTasksByUserId(@PathVariable Long userId) {
+    public List<Task> getTasksByUserId(@PathVariable("userId") Long userId) {
         return taskService.findByUserId(userId);
     }
 
-    // Get all tasks for a category
+    // Get all tasks for a category - Most common use.
     @GetMapping("/category/{categoryId}")
-    public List<Task> getTasksByCategoryId(@PathVariable Long categoryId) {
+    public List<Task> getTasksByCategoryId(@PathVariable("categoryId") Long categoryId) {
         return taskService.findByCategoryId(categoryId);
     }
 
     // Delete a task
     @DeleteMapping("/{id}")
-    public void deleteTask(@PathVariable Long id) {
+    public void deleteTask(@PathVariable("id") Long id) {
         taskService.deleteTask(id);
     }
 }

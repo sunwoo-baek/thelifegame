@@ -1,12 +1,12 @@
 package com.sunwoo.thelifegame.controller;
 
-import com.sunwoo.thelifegame.model.Category;
+import com.sunwoo.thelifegame.dto.CategorySaveRequest;
 import com.sunwoo.thelifegame.service.CategoryService;
+import com.sunwoo.thelifegame.dto.CategoryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/categories")
@@ -21,37 +21,37 @@ public class CategoryController {
 
     // save category
     @PostMapping
-    public Category saveCategory(@RequestBody Category category) {
+    public CategoryResponse saveCategory(@RequestBody CategorySaveRequest category) {
         return categoryService.saveCategory(category);
     }
 
     // Get category by ID
     @GetMapping("/{id}")
-    public Optional<Category> getCategoryById(@PathVariable Long id) {
+    public CategoryResponse getCategoryById(@PathVariable("id") Long id) {
         return categoryService.findById(id);
     }
 
     // get all categories for a user
     @GetMapping("/user/{userId}")
-    public List<Category> getCategoriesByUserId(@PathVariable Long userId) {
+    public List<CategoryResponse> getCategoriesByUserId(@PathVariable("userId") Long userId) {
         return categoryService.findByUserId(userId);
     }
 
     // get all sub-categories for a parent category
     @GetMapping("/parent/{parentId}")
-    public List<Category> getSubCategoriesByParentId(@PathVariable Long parentId) {
+    public List<CategoryResponse> getSubCategoriesByParentId(@PathVariable("parentId") Long parentId) {
         return categoryService.findByParentId(parentId);
     }
 
     // Update category
     @PatchMapping("/{id}")
-    public Category updateCategory(@PathVariable Long id, @RequestBody Category updatedCategory) {
+    public CategoryResponse updateCategory(@PathVariable("id") Long id, @RequestBody CategorySaveRequest updatedCategory) {
         return categoryService.updateCategory(id, updatedCategory);
     }
 
     // Delete category
     @DeleteMapping("/{id}")
-    public void deleteCategory(@PathVariable Long id) {
+    public void deleteCategory(@PathVariable("id") Long id) {
         categoryService.deleteCategory(id);
     }
 }
