@@ -9,4 +9,5 @@ public class CategorySaveRequest {
     private String description;
     private String unit; // e.g., "hour", "item", "session"
     private Integer pointsPerUnit;
+    private Integer totalPoints;
 }

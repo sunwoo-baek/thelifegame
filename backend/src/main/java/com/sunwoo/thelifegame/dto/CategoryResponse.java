@@ -10,4 +10,5 @@ public class CategoryResponse {
     private String description;
     private String unit; // e.g., "hours", "items"
     private Integer pointsPerUnit;
+    private Integer totalPoints;
 }

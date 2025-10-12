@@ -29,22 +29,27 @@ public class Category {
     private String name;
 
     @Column(columnDefinition = "TEXT")
-    private String description;
+    private String description = "";
 
     @Column(length = 100)
     private String unit;
 
     @Column(name = "points_per_unit")
-    private Integer pointsPerUnit;
+    private Integer pointsPerUnit = 0;
+
+    @Column(name = "total_points")
+    private Integer totalPoints = 0;
 
     // Constructors
     public Category() {} // for JPA
 
+    // main category
     public Category(String name, String description, User user, String unit, Integer pointsPerUnit) {
         this(name, description, user, null, unit, pointsPerUnit);
     }
 
-    public Category(String name, String description, User user, Category parent, String unit, Integer pointsPerUnit) {
+    // sub category
+    public Category(String name, String description, User user, Category parent, String unit, int pointsPerUnit) {
         this.name = name;
         this.description = description;
         this.user = user;
@@ -76,5 +81,8 @@ public class Category {
 
     public Integer getPointsPerUnit() { return pointsPerUnit; }
     public void setPointsPerUnit(Integer pointsPerUnit) { this.pointsPerUnit = pointsPerUnit; }
+
+    public Integer getTotalPoints() { return totalPoints; }
+    public void setTotalPoints(Integer totalPoints) { this.totalPoints = totalPoints; }
 
 }

@@ -37,6 +37,7 @@ public class CategoryService {
         if (request.getDescription() != null) updatedCategory.setDescription(request.getDescription());
         if (request.getUnit() != null) updatedCategory.setUnit(request.getUnit());
         if (request.getPointsPerUnit() != null) updatedCategory.setPointsPerUnit(request.getPointsPerUnit());
+        if (request.getTotalPoints() != null) updatedCategory.setTotalPoints(request.getTotalPoints());
 
         if (request.getUserId() != null) {
             User user = userRepository.findById(request.getUserId())

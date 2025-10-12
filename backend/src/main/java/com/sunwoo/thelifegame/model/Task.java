@@ -20,11 +20,12 @@ public class Task {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
+    // Could set a default title derived from its category.
     @Column(nullable = false, length = 255)
     private String title;
 
     @Column(columnDefinition = "TEXT")
-    private String description;
+    private String description = "";
 
     @Column(name = "occurred_at", nullable = false)
     private LocalDateTime occurredAt;
@@ -33,10 +34,11 @@ public class Task {
     private Integer durationSeconds;
 
     @Column(name = "quantity")
-    private Integer quantity;
+    private Integer quantity = 1;
 
-    @Column(name = "points_earned") // This could potentially be calculated on the fly
-    private Integer pointsEarned;
+    // this needs testing
+    @Column(name = "points_per_unit")
+    private Integer pointsPerUnit = 0;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -44,13 +46,16 @@ public class Task {
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
+        if (this.category != null && this.pointsPerUnit == 0) {
+            this.pointsPerUnit = this.category.getPointsPerUnit();
+        }
     }
 
     // Constructors
     public Task() {} // for JPA
 
     public Task(User user, Category category, String title, String description,
-                LocalDateTime occurredAt, Integer durationSeconds, Integer quantity, Integer pointsEarned) {
+                LocalDateTime occurredAt, Integer durationSeconds, Integer quantity, int pointsEarned) {
         this.user = user;
         this.category = category;
         this.title = title;
@@ -58,7 +63,7 @@ public class Task {
         this.occurredAt = occurredAt;
         this.durationSeconds = durationSeconds;
         this.quantity = quantity;
-        this.pointsEarned = pointsEarned;
+        this.pointsPerUnit =  category != null ? category.getPointsPerUnit() : 0;
         this.createdAt = LocalDateTime.now();
     }
 
@@ -88,8 +93,8 @@ public class Task {
     public Integer getQuantity() { return quantity; }
     public void setQuantity(Integer quantity) { this.quantity = quantity; }
 
-    public Integer getPointsEarned() { return pointsEarned; }
-    public void setPointsEarned(Integer pointsEarned) { this.pointsEarned = pointsEarned; }
+    public Integer getPointsPerUnit() { return pointsPerUnit; }
+    public void setPointsPerUnit(Integer pointsPerUnit) { this.pointsPerUnit = pointsPerUnit; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
 }

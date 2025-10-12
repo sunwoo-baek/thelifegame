@@ -35,3 +35,24 @@ Goals feature:
     - Optionals: desc, metric, quantity, duration
     - list goals for certain categories
     - potentially add progress bar
+
+Points Logic:
+- User entity holds total points earned, but it depends on its categories.
+- The concern is, how do we deal with points updates? Points can be updated/edited at task level or even category level.
+- When users change how much points a category is worth, does that change the whole history or just from that point on?
+- In that case, the task itself does not hold any point logic. Only holds how much was done, and logic is based on category.
+- Is there an intuitive logic that will fit this point feature?
+
+- Task:
+    - replace points_earned with points_per_unit (which is snapshotted from Category)
+
+- Category:
+    - add total_points
+    - this sums all points through the tasks/categories
+
+- User:
+    - add total_points
+    - this sums all points through the categories
+
+- this design preserves history and allows flexible editing in the future.
+- think of Category's points_per_unit as a default setter.
