@@ -40,9 +40,9 @@ All endpoints follow standard REST CRUD patterns.
 They’ve been tested and validated using Postman.
 
 **Core Routes Include:**
-- `/users` – create, update, delete, list  
-- `/categories` – category CRUD, nested category lookups  
-- `/tasks` – task CRUD, logging tasks, fetching by user/category
+- `/api/users` – create, update, delete, list  
+- `/api/categories` – category CRUD, nested category lookups  
+- `/api/tasks` – task CRUD, logging tasks, fetching by user/category
 
 ## Architecture
 Standard Spring Boot layered architecture:
